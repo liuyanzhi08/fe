@@ -78,3 +78,102 @@ HTML4定义了很多的标签来描述文档结构，比如`<h1>` `<p>` `<em>` `
     `<em>`和`<strong>`：更`<i>`和`<b>`相反，它们则是语义化很好的标签，他们分别表示‘强调’和‘更强的强调’。   
 
 # HTML5
+
+## Canvas
+
+你需要知道的是Canvas是H5提供的画图API，因为它，你能将丰富的数据机构转化成一幅幅丰富的画，再运用上定时器，你就能得到美丽的动画。
+
+有一些需要掌握的基础知识：
+
+1. 使用Canvas画一个圆(线、举行、渐变、图片等)有哪些步骤？
+
+   获取Canvas元素c -> cxt = c.getContext()获取绘图上下文 -> cxt.fillStyle设置填充颜色 -> cxt.beginPath()开始一个新路径
+   -> cxt.arc绘制弧形 -> cxt.closePath()关闭路径 -> cxt.fill()填充
+   
+   参考http://www.w3school.com.cn/html5/html_5_canvas.asp
+   
+2. Canvas和SVG有什么区别？
+    
+   ||渲染速度|事件处理|分辨率|对搜索引擎友好|
+   |---|---|---|---|---|
+   |Canvas|快|支持|根据像素定义，固定大小|不支持搜索引擎抓取内容|
+   |SVG|慢|支持|宽度自适应|支持搜索引擎抓取内容|
+   
+   SVG支持DOM事件定义，因为需要处理事件，渲染速度比较慢，但是可以很方便的进行DOM操作，有强大的交互处理能力。
+   Canvas不支持DOM事件定义，渲染过程仅仅是绘图，因此很快，适合游戏等图像密集的应用。
+   Canvas最后导出的就是一个<canvas></canvas>标签，而SVG则导出丰富的标签，如<rect></rect>、<font></font>等
+   
+## 本地存储localStorage和sessionStorage
+
+1. cookie和localStorage的相同和不同的地方？
+
+    - 相同点：他们都是用来做本地存储的
+    - 不同点：他们最大的不同点就是用http对一个页面进行请求的时候，**header部分会带上cookie，而不会带上localstorage**。
+   正是因为这个原因，浏览器为了性能，一般cookie最大一般只能有几K的大小，而localStorage则有几十M的大小。
+   不是非得在header携带的信息尽可能存储在localStorage中，非得用cookie携带的信息则存储在cookie中，例如：
+   前后端分离的应用中，后端API需要用作权限认证的token，只能存储在cookie中，这样token才能随http请求携带过去进行权限验证
+   
+2. localStorage和sessionStorage的不同点？
+   
+   localStorage储存永久生效，sessionStorage在用户关闭浏览器窗口后，数据会被删除
+   
+   
+## 服务器推送
+
+1. 服务器推送怎么做？有什么用？
+
+   服务端： 设置一下header头：'Content-Type: text/event-stream‘和'Cache-Control: no-cache'
+   客户端：新建一个EventSource对象，监听该对象的onmsessage方法，获取服务端事件
+   
+## WebSocket
+
+平行于Http，WebSocket是基于TCP的一种新的网络协议。
+
+1. WebSocket和Http的区别？
+
+    Websocket是一个持久化的协议，相对于HTTP这种非持久的协议（无状态协议）来说。
+    
+    Http每一次发送接收请求都要经过三次握手，而且每一次请求都是独立的，服务器不知道每一次接收到的请求是谁发送的，
+    需要使用到session的技术来分辨两次请求是不是同一个来源。
+    
+    Websocket是一个持久化的协议，建立了联系以后保持着这个联系，直到关闭连接。在socket打开期间，服务端和客户端
+    明确地知道对方的身份，并且可以实时向对方发送数据。
+    
+2. 实现聊天室功能，有哪些方法？
+    
+    - AJAX轮循。设置定时器，定时向服务端拉取数据。
+    - IFrame轮循。设置定时器，改变IFrame的src属性（指向服务端数据源），从而定时获取服务器数据。
+    - Long Poll。客户端把AJAX的timeout时间设置成很长，服务端把请求设为长连接，服务端在有数据推送的时候才respond
+    - Flash。socket技术实现长久连接，双工通信。
+    - WebSocket。WebSocket技术实现长久连接，双工通信。
+   
+## 拖拽
+
+增加了这三个ondragstart、ondrop、ondragover事件处理器。
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
